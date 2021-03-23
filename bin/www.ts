@@ -3,9 +3,10 @@
  * Created by Smarttkow on 4/5/17.
  */
 import * as http from "http";
+
 import {app} from "../app";
 
-const port: number = 3000;
+const port: number = 443;
 
 //TODO: add error event
 const server = http.createServer(app as any)
