@@ -1,0 +1,34 @@
+{
+  "name": "nodejs-express-typescript-seed-project",
+  "version": "1.0.0",
+  "description": "This is a seed project for express and node js using type script and typings.",
+  "main": "bin/www.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx ts-node bin/www.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Smarttkow/nodejs-express-typescript-seed-project.git"
+  },
+  "keywords": [
+    "express",
+    "typings",
+    "typescript"
+  ],
+  "author": "Smarttkow",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Smarttkow/nodejs-express-typescript-seed-project/issues"
+  },
+  "homepage": "https://github.com/Smarttkow/nodejs-express-typescript-seed-project#readme",
+  "dependencies": {
+    "@google-analytics/data": "^2.3.0",
+    "express": "^4.15.2",
+    "typescript": "^2.2.2",
+    "typings": "^2.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.35"
+  }
+}
