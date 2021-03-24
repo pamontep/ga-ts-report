@@ -6,7 +6,7 @@ import * as http from "http";
 
 import {app} from "../app";
 
-const port: number = 443;
+const port: number = 9443;
 
 //TODO: add error event
 const server = http.createServer(app as any)
