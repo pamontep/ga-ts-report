@@ -66,7 +66,7 @@ index.get('/ga-report', async (req, res, next) => {
         var startDate = "";
         var endDate = "";
         if (req.query["propertyId"]) {
-            propertyId = req.query["propertyId"];
+            propertyId = "" + req.query["propertyId"];
         }
         if (req.query["startDate"]) {
             startDate = req.query["startDate"];
