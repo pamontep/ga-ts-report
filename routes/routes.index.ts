@@ -15,9 +15,9 @@ index.get('/info', (req, res, next) => {
     res.render('server info');
 });
 
-const propertyId = "261948992";
+const propertyId = "properties/261948992";
 
-const {BetaAnalyticsDataClient, AlphaAnalyticsDataClient} = require('@google-analytics/data');
+const {BetaAnalyticsDataClient} = require('@google-analytics/data');
 
 // Creates a client.
 const analyticsDataClient = new BetaAnalyticsDataClient();
@@ -28,42 +28,98 @@ async function runReport() {
     entity: {
       propertyId: propertyId,
     },
+    property: propertyId,
     dateRanges: [
       {
         startDate: '2020-03-31',
         endDate: 'today',
       },
     ],
-    dimensions: [
-      {
-        name: 'city',
-      },
+    dimensions: [ 
+        {
+            name: 'eventName'
+        },
+        {
+            name: 'date'
+        }
     ],
     metrics: [
-      {
-        name: 'activeUsers',
-      },
+        {
+        name: 'eventCount',
+        },
     ],
+    orderBys: [
+        {
+            desc: false,
+            dimension: {
+                dimensionName: "date",
+                orderType: "NUMERIC"
+            }
+        }
+    ]
   });
 
   console.log('Report result:');
   response.rows.forEach(row => {
     console.log(row.dimensionValues[0], row.metricValues[0]);
   });
+
+  return response;
 }
 
 runReport();
 
+/*
+const {AlphaAnalyticsDataClient} = require('@google-analytics/data');
+const client = new AlphaAnalyticsDataClient();
+
+async function runReport2() {
+    const [response] = await client.runReport({
+        entity: {
+            propertyId: propertyId,
+        },
+        dateRanges: [
+            {
+            startDate: '2020-01-28',
+            endDate: 'today',
+            },
+        ],
+        dimensions: [ 
+            {
+                name: 'eventName'
+            },
+            {
+                name: 'date'
+            }
+        ],
+        metrics: [
+            {
+            name: 'eventCount',
+            },
+        ],
+        limit: -1,
+        orderBys: [
+            {
+                desc: false,
+                dimension: {
+                    dimensionName: "date",
+                    orderType: "NUMERIC"
+                }
+            }
+        ] 
+    });
+}
+*/
+
+
+//runReport2();
+
 index.get('/ga-report', async (req, res, next) => {
 
     try {
-        /*const result = await getReport();
+        const result = await runReport();
 
-        console.log("runReport result", result);
-
-        res.render(1234);
-
-        return 1;*/
+        res.json(result);
     } catch (e) {
         console.log(e);
     }
