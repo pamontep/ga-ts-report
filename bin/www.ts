@@ -2,14 +2,14 @@
  *
  * Created by Smarttkow on 4/5/17.
  */
-import * as http from "http";
+import * as https from "http";
 
 import {app} from "../app";
 
 const port: number = 9443;
 
 //TODO: add error event
-const server = http.createServer(app as any)
+const server = https.createServer(app as any)
     .listen(port);
 
 server.on("listening", () => {
