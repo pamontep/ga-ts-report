@@ -2,8 +2,12 @@
  *
  * Created by Smarttkow on 4/5/17.
  */
+
+process.env.GOOGLE_APPLICATION_CREDENTIALS = "GoogleAnalyticTest-aae44e389476.json";
+
 import * as express from 'express';
 import * as fs from 'fs';
+
 import {index} from './routes';
 
 const RESOURCE_NOT_FOUND = "RESOURCE_NOT_FOUND";
