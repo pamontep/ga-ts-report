@@ -10,24 +10,22 @@ index.get('/info', (req, res, next) => {
     res.render('server info');
 });
 
-const propertyId = "properties/261948992";
-
 const {BetaAnalyticsDataClient} = require('@google-analytics/data');
 
 // Creates a client.
 const analyticsDataClient = new BetaAnalyticsDataClient();
 
 // Runs a simple report.
-async function runReport() {
+async function runReport(propertyId, startDate, endDate) {
   const [response] = await analyticsDataClient.runReport({
     entity: {
-      propertyId: propertyId,
+      propertyId: "properties/" + propertyId,
     },
-    property: propertyId,
+    property: "properties/" + propertyId,
     dateRanges: [
       {
-        startDate: '2020-01-28',
-        endDate: 'today',
+        startDate: startDate || '2020-01-28',
+        endDate: endDate || 'today',
       },
     ],
     dimensions: [ 
@@ -54,61 +52,30 @@ async function runReport() {
     ]
   });
 
-  console.log('Report result:');
-  response.rows.forEach(row => {
-    console.log(row.dimensionValues[0], row.metricValues[0]);
-  });
+//   console.log('Report result:');
+//   response.rows.forEach(row => {
+//     console.log(row.dimensionValues[0], row.metricValues[0]);
+//   });
 
   return response;
 }
 
-runReport();
-
-/*
-const {AlphaAnalyticsDataClient} = require('@google-analytics/data');
-const client = new AlphaAnalyticsDataClient();
-
-async function runReport2() {
-    const [response] = await client.runReport({
-        entity: {
-            propertyId: propertyId,
-        },
-        dateRanges: [
-            {
-            startDate: '2020-01-28',
-            endDate: 'today',
-            },
-        ],
-        dimensions: [ 
-            {
-                name: 'eventName'
-            },
-            {
-                name: 'date'
-            }
-        ],
-        metrics: [
-            {
-            name: 'eventCount',
-            },
-        ],
-        limit: -1,
-        orderBys: [
-            {
-                desc: false,
-                dimension: {
-                    dimensionName: "date",
-                    orderType: "NUMERIC"
-                }
-            }
-        ] 
-    });
-}
-*/
-
 index.get('/ga-report', async (req, res, next) => {
     try {
-        const result = await runReport();
+        var propertyId = "261948992";
+        var startDate = "";
+        var endDate = "";
+        if (req.query["propertyId"]) {
+            propertyId = req.query["propertyId"];
+        }
+        if (req.query["startDate"]) {
+            startDate = req.query["startDate"];
+        }
+        if (req.query["endDate"]) {
+            endDate = req.query["endDate"];
+        }
+
+        const result = await runReport(propertyId, startDate, endDate);
 
         res.json(result);
     } catch (e) {
