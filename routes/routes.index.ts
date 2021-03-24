@@ -1,8 +1,3 @@
-/**
- *
- * Created by Smarttkow on 4/5/17.
- */
-
 import * as express from 'express';
 
 export const index = express.Router();
@@ -31,7 +26,7 @@ async function runReport() {
     property: propertyId,
     dateRanges: [
       {
-        startDate: '2020-03-31',
+        startDate: '2020-01-28',
         endDate: 'today',
       },
     ],
@@ -111,11 +106,7 @@ async function runReport2() {
 }
 */
 
-
-//runReport2();
-
 index.get('/ga-report', async (req, res, next) => {
-
     try {
         const result = await runReport();
 

@@ -1,7 +1,3 @@
-/**
- *
- * Created by Smarttkow on 4/5/17.
- */
 import * as https from "http";
 
 import {app} from "../app";
