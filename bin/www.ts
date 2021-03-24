@@ -6,7 +6,7 @@ import * as https from "http";
 
 import {app} from "../app";
 
-const port: number = 9443;
+const port: number = process.env.PORT || 9443;
 
 //TODO: add error event
 const server = https.createServer(app as any)
