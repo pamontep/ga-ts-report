@@ -24,11 +24,13 @@
   "homepage": "https://github.com/Smarttkow/nodejs-express-typescript-seed-project#readme",
   "dependencies": {
     "@google-analytics/data": "^2.3.0",
+    "cors": "^2.8.5",
     "express": "^4.15.2",
     "typescript": "^2.2.2",
     "typings": "^2.1.1"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.10",
     "@types/node": "^14.14.35"
   }
 }
